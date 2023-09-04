@@ -1,0 +1,75 @@
+{
+    "name": "laravel/laravel",
+    "type": "project",
+    "description": "The Laravel Framework.",
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
+    "license": "UNLICENSED",
+    "require": {
+        "php": "~8.0.0 || ~8.1.0 || ~8.2.0",
+        "ext-xml": "*",
+        "ext-zip": "*",
+        "doctrine/dbal": "^3.1",
+        "fideloper/proxy": "^4.4",
+        "fruitcake/laravel-cors": "^3.0",
+        "guzzlehttp/guzzle": "^7.0.1",
+        "laravel/framework": "^8.12",
+        "laravel/tinker": "^2.5",
+        "shopify/shopify-api": "^5.0",
+        "squizlabs/php_codesniffer": "^3.6"
+    },
+    "require-dev": {
+        "facade/ignition": "^2.5",
+        "fakerphp/faker": "^1.9.1",
+        "laravel/sail": "^1.0.1",
+        "mockery/mockery": "^1.4.2",
+        "nunomaduro/collision": "^5.0",
+        "phpunit/phpunit": "^9.3.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ],
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "php artisan serve"
+        ],
+        "react": "npm run watch",
+        "lint": "./vendor/bin/phpcs --standard=PSR12 app routes",
+        "build": "composer build-frontend-links",
+        "build-frontend-links": "ln -sf ../frontend/dist/assets public/assets && ln -sf ../frontend/dist/index.html public/index.html"
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
