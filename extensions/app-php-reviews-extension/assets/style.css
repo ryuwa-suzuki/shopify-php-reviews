@@ -1,0 +1,20 @@
+.stars span{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.stars input[type='radio']{
+  display: none;
+}
+
+.stars label{
+  color: #bab7b7;
+  font-size: 20px;
+  padding: 0 3px;
+  cursor: pointer;
+}
+
+.stars input[type='radio']:checked ~ label{
+  color: #ffc106;
+}
