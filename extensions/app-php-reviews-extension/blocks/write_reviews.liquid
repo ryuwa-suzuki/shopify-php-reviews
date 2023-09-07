@@ -1,0 +1,30 @@
+{{ 'style.css' | asset_url | stylesheet_tag }}
+<div>
+    <label for="review-name">Name: </label>
+    <input id="review-name" type="text" placeholder="Name">
+</div>
+<div class="review">
+    <label>Rating:</label>
+    <div class="stars">
+        <span>
+            <input id="star5" type="radio" name="review-rating" value="5" checked><label for="star5">★</label>
+            <input id="star4" type="radio" name="review-rating" value="4"><label for="star4">★</label>
+            <input id="star3" type="radio" name="review-rating" value="3"><label for="star3">★</label>
+            <input id="star2" type="radio" name="review-rating" value="2" ><label for="star2">★</label>
+            <input id="star1" type="radio" name="review-rating" value="1" ><label for="star1">★</label>
+        </span>
+    </div>
+</div>
+<div>
+    <label for="review-comment">Comment: </label>
+    <textarea id="review-comment" width="auto"></textarea>
+</div>
+<button onclick="submit({{product.id}})">Submit</button>
+
+<script src="{{ 'product-reviews-form.js' | asset_url }}" defer></script>
+{% schema %}
+{
+    "name": "Write Reviews",
+    "target": "section"
+}
+{% endschema %}
