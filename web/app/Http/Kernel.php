@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
 
         'shopify.auth' => \App\Http\Middleware\EnsureShopifySession::class,
         'shopify.installed' => \App\Http\Middleware\EnsureShopifyInstalled::class,
+        'shopify.proxy' => \App\Http\Middleware\CalculateDigitalSignature::class,
     ];
 }
