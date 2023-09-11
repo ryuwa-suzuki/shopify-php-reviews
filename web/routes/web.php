@@ -146,3 +146,4 @@ Route::post('/api/webhooks', function (Request $request) {
 });
 
 Route::post('/api/reviews/create', [ReviewController::class, 'create'])->middleware('shopify.proxy');
+Route::get('/api/reviews', [ReviewController::class, 'index'])->middleware('shopify.auth');
