@@ -18,6 +18,36 @@ class ReviewController extends Controller
         $this->reviewHelper = $reviewHelper;
     }
 
+    public function index (Request $request)
+    {
+        $reviews = [];
+        $session = $request->get('shopifySession');
+        $shop = Session::where('shop', $session->getShop())->first();
+        $reviews = Review::where('shop_id', $shop->id)->get();
+
+        $productIds = [];
+        foreach ($reviews as $review) {
+            if (!in_array($review['product_id'], $productIds)) {
+                $productIds[] = $review['product_id'];
+            }
+        }
+
+        $client = new Rest($session->getShop(), $session->getAccessToken());
+        $result = $client->get('products', [], ['ids'=> implode(',', $productIds)] );
+        $products = $result->getDecodedBody();
+
+        foreach ($reviews as $review) {
+            foreach ($products['products'] as $product) {
+                if ((int)$review['product_id'] === $product['id']) {
+                    $review['product'] = $product;
+                    break;
+                }
+            }
+        }
+
+        return response($reviews, 200);
+    }
+
     public function create(Request $request)
     {
         $requestData = $request->all();
